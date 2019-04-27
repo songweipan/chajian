@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title> 广告图片轮播切换</title>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="adver" id="d1" onmouseover="xs()" onmouseout="xss()">
+			<ul>
+				<li id="li1" onmouseover="li(this)">1</li>
+				<li id="li2" onmouseover="li(this)">2</li>
+				<li id="li3" onmouseover="li(this)">3</li>
+				<li id="li4" onmouseover="li(this)">4</li>
+				<li id="li5" onmouseover="li(this)">5</li>
+				<li id="li6" onmouseover="li(this)">6</li>
+			</ul>
+			<div class="arrowLeft" id="d2" onclick="sdjs()"><</div>
+				
+			<div class="arrowRight" id="d3" onclick="sdzj()">></div>
+		</div>
+			<script type="text/javascript">
+				var img = new Array("1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", )
+				var i = 0;
+				var s = true;
+
+				function xs() {
+					document.getElementById("d2").style.display = "block";
+					document.getElementById("d3").style.display = "block";
+					s = false;
+				}
+
+				function xss() {
+					document.getElementById("d2").style.display = "none";
+					document.getElementById("d3").style.display = "none";
+					s = true;
+				}
+
+				function sdzj() {
+					if(i >= 5) {
+						i = 0;
+						var img2 = img[i];
+						document.getElementById("d1").style.background = "url(img/" + img2 + ")";
+						document.getElementById("li6").style.backgroundColor = "#333333";
+						document.getElementById("li1").style.backgroundColor = "orange";
+					} else {
+						i = i + 1;
+						var img2 = img[i];
+						document.getElementById("d1").style.background = "url(img/" + img2 + ")";
+						document.getElementById("li" + i).style.backgroundColor = "#333333";
+						document.getElementById("li" + i).nextElementSibling.style.backgroundColor = "orange";
+					}
+				}
+
+				function sdjs() {
+					if(i < 1) {
+						i = 5;
+						var img2 = img[i];
+						document.getElementById("d1").style.background = "url(img/" + img2 + ")";
+						document.getElementById("li1").style.backgroundColor = "#333333";
+						document.getElementById("li6").style.backgroundColor = "orange";
+					} else {
+						document.getElementById("li" + (i + 1)).style.backgroundColor = "#333333";
+						document.getElementById("li" + (i + 1)).previousElementSibling.style.backgroundColor = "orange";
+						i = i - 1;
+						var img2 = img[i];
+						document.getElementById("d1").style.background = "url(img/" + img2 + ")";
+
+					}
+				}
+
+				function li(a) {
+					var aa = a.innerHTML;
+					i = parseInt(aa) - 1;
+					var img2 = img[i];
+					document.getElementById("d1").style.background = "url(img/" + img2 + ")";
+					for(var ii = 1; ii <= 6; ii++) {
+						document.getElementById("li" + ii).style.backgroundColor = "#333333";
+					}
+					a.style.backgroundColor = "orange";
+				}
+
+				function pd() {
+					if(s) {
+						sdzj();
+					}
+
+				}
+				setInterval("pd()", 2000);
+			</script>
+	</body>
+
+</html>
